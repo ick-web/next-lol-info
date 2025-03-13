@@ -14,6 +14,7 @@ export default async function ItemsPage() {
 
   return (
     <>
+    <h2 className='text-2xl font-semibold px-10 mt-7 text-red-400'>아이템 목록</h2>
       <ItemList items={items} />
     </>
   );
