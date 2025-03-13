@@ -16,6 +16,7 @@ export default async function ChampionPage() {
 
   return (
     <>
+    <h2 className='text-2xl font-semibold px-10 mt-7 text-red-400'>챔피언 목록</h2>
     <ChampionList champions={champions}/>
     </>
   )
