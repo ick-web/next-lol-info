@@ -22,7 +22,7 @@ const HomePage = () => {
                 "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kaisa_0.jpg"
               }
               priority={true}
-              width={300}
+              width={400}
               height={300}
               alt="챔피언 목록 보기"
               className="flex flex-col items-center justify-center"
@@ -37,7 +37,7 @@ const HomePage = () => {
                 "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jhin_4.jpg"
               }
               priority={true}
-              width={300}
+              width={400}
               height={300}
               alt="금주 로테이션 확인"
               className="flex flex-col items-center justify-center"
@@ -52,7 +52,7 @@ const HomePage = () => {
                 "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Fiddlesticks_8.jpg"
               }
               priority={true}
-              width={300}
+              width={400}
               height={300}
               alt="아이템 목록 보기"
               className="flex flex-col items-center justify-center"
