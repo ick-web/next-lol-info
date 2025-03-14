@@ -1,6 +1,8 @@
 import { Champion, ChampionDetail } from "@/types/Champion";
 import { Item } from "@/types/Item";
 
+const ONE_DAY_SECONDS = 60 * 60 * 24;
+
 //최신 버전 가져오기
 async function getLatestVersion(): Promise<string> {
   try {
@@ -43,7 +45,7 @@ export async function fetchChampionList(): Promise<Record<string, Champion>> {
       `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion.json`,
       {
         next: {
-          revalidate: 86400,
+          revalidate: ONE_DAY_SECONDS,
         },
       }
     );
@@ -65,7 +67,7 @@ export async function fetchChampionDetail(
       `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/champion/${id}.json`,
       {
         next: {
-          revalidate: 86400,
+          revalidate: ONE_DAY_SECONDS,
         },
       }
     );
