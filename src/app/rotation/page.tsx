@@ -1,9 +1,16 @@
-import React from 'react'
+"use client";
+
+import { getChampionRotationData } from "@/utils/riotApi";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
 
 const RotationPage = () => {
-  return (
-    <div>RotationPage</div>
-  )
-}
+  const { data } = useQuery({
+    queryKey: ["ChampionRotation"],
+    queryFn: getChampionRotationData,
+  });
 
-export default RotationPage
+  return <div>{JSON.stringify(data)}</div>;
+};
+
+export default RotationPage;

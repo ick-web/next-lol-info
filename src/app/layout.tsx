@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import Providers from "./providers";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,7 +32,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+        <Providers>
         {children}
+        </Providers>
         <footer className="fixed bottom-0 mt-8 w-full bg-gray-800 p-4">
           <div className="container mx-auto text-center text-sm text-white">
             [Your Product Name] is not endorsed by Riot Games and does not
