@@ -102,5 +102,4 @@ export interface ChampionDetail extends Champion {
       h: number;
     };
   };
-  recommended?: any[];
 }

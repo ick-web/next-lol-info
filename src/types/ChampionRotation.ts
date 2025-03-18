@@ -1,5 +1,5 @@
 export interface ChampionRotation {
-  maxNewPlayerLevel: Number;
-  freeChampionIdsForNewPlayers: Number[];
-  freeChampionIds: Number[];
+  maxNewPlayerLevel: number;
+  freeChampionIdsForNewPlayers: number[];
+  freeChampionIds: number[];
 }

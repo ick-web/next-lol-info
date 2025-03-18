@@ -7,13 +7,16 @@ const ONE_DAY_SECONDS = 60 * 60 * 24;
 async function getLatestVersion(): Promise<string> {
   try {
     const res = await fetch(
-      "https://ddragon.leagueoflegends.com/api/versions.json"
+      "https://ddragon.leagueoflegends.com/api/versions.json",
     );
     if (!res.ok) throw new Error("Failed to fetch versions");
     const data = await res.json();
     return data[0];
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("An unknown error occurred");
   }
 }
 
@@ -24,7 +27,7 @@ function getItemImageUrl(version: string, imageFileName: string): string {
 
 async function createItemsWithImage(
   items: Record<string, Item>,
-  version: string
+  version: string,
 ) {
   const updatedItems: Record<string, Item> = {};
 
@@ -47,19 +50,22 @@ export async function fetchChampionList(): Promise<Record<string, Champion>> {
         next: {
           revalidate: ONE_DAY_SECONDS,
         },
-      }
+      },
     );
     if (!res.ok) throw new Error("Failed to fetch champions");
     const data = await res.json();
     return data.data;
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("An unknown error occurred");
   }
 }
 
 // 챔피언 상세정보 가져오기
 export async function fetchChampionDetail(
-  id: string
+  id: string,
 ): Promise<{ version: string; data: ChampionDetail }> {
   try {
     const version = await getLatestVersion();
@@ -69,14 +75,17 @@ export async function fetchChampionDetail(
         next: {
           revalidate: ONE_DAY_SECONDS,
         },
-      }
+      },
     );
     if (!res.ok) throw new Error("Failed to fetch champions detail");
     const data = await res.json();
     if (!data.data[id]) throw new Error(`Champion ${id} not found`);
     return { version, data: data.data[id] };
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("An unknown error occurred");
   }
 }
 
@@ -88,13 +97,16 @@ export async function fetchItemList(): Promise<Record<string, Item>> {
       `https://ddragon.leagueoflegends.com/cdn/${version}/data/ko_KR/item.json`,
       {
         cache: "force-cache",
-      }
+      },
     );
     if (!res.ok) throw new Error("Faild to fetch items");
     const data = await res.json();
     const items = data.data;
     return await createItemsWithImage(items, version);
-  } catch (error: any) {
-    throw new Error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
+    throw new Error("An unknown error occurred");
   }
 }
