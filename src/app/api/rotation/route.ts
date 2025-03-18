@@ -1,5 +1,7 @@
+import { Champion } from "@/types/Champion";
 import { ChampionRotation } from "@/types/ChampionRotation";
 import { apiKey, apiRequestUrl } from "@/utils/riotApi";
+import { fetchChampionList } from "@/utils/serverApi";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -10,6 +12,7 @@ export async function GET() {
     );
   }
 
+  //로테이션 정보 가져오기
   try {
     const res = await fetch(apiRequestUrl, {
       method: "GET",
@@ -25,8 +28,24 @@ export async function GET() {
       throw new Error(`API 요청 실패: 상태 코드 ${res.status}`);
     }
 
-    const data: ChampionRotation[] = await res.json();
-    return NextResponse.json(data);
+    const data: ChampionRotation = await res.json();
+    const freeChampionIds = data.freeChampionIds;
+
+    // 챔피언 정보 가져오기
+    const champions = await fetchChampionList();
+
+    // 무료 챔피언 ID 목록과 챔피언 데이터 비교
+    const freeChampionDetails = freeChampionIds.map((id) => {
+      const champion = Object.values(champions).find(
+        (champ: Champion) => champ.key === id.toString(),
+      );
+      if (champion) {
+        return champion;
+      }
+      return null;
+    });
+
+    return NextResponse.json(freeChampionDetails);
   } catch (error) {
     console.error("데이터 패치 중 에러가 발생 했어요!", error);
     return NextResponse.json(
