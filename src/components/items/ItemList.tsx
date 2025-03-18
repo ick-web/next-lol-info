@@ -1,15 +1,14 @@
 import { Item } from "@/types/Item";
 import ItemCard from "./itemCard";
 
-type ItemListProps = { items: Item[] }
+type ItemListProps = { items: Item[] };
 
-export default function ItemList({ items }: ItemListProps){
-    return (
-        <ul className="p-8 gap-5 grid grid-cols-6">
-            {items.map((item) => (
-                <ItemCard key={item.name} item={item}/>
-            ))}
-        </ul>
-    )
+export default function ItemList({ items }: ItemListProps) {
+  return (
+    <ul className="grid grid-cols-1 gap-5 p-8 md:grid-cols-3 lg:grid-cols-6">
+      {items.map((item) => (
+        <ItemCard key={item.name} item={item} />
+      ))}
+    </ul>
+  );
 }
-
