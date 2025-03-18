@@ -5,7 +5,7 @@ export const apiRequestUrl =
   "https://kr.api.riotgames.com/lol/platform/v3/champion-rotations";
 // 챔피언 로테이션 데이터 가져오기
 export const getChampionRotationData =
-  async (): Promise<ChampionRotation | null> => {
+  async (): Promise<ChampionRotation | []> => {
     // API 요청 (CSR 적용)
 
     try {
@@ -21,6 +21,6 @@ export const getChampionRotationData =
       return data;
     } catch (error) {
       console.error("API 요청 실패 : ", error);
-      return null;
+      return [];
     }
   };
