@@ -1,7 +1,8 @@
 import ChampionList from "@/components/champions/ChampionList";
 import { Champion } from "@/types/Champion";
 import { fetchChampionList } from "@/utils/serverApi";
-import React from "react";
+import React, { Suspense } from "react";
+import Loading from "./loading";
 
 async function fetchChampionListData() {
   const data = await fetchChampionList();
@@ -18,7 +19,9 @@ export default async function ChampionPage() {
       <h2 className="mt-7 px-10 text-2xl font-semibold text-red-400">
         챔피언 목록
       </h2>
-      <ChampionList champions={champions} />
+      <Suspense fallback={<Loading />}>
+        <ChampionList champions={champions} />
+      </Suspense>
     </>
   );
 }
